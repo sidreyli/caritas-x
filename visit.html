@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visit Us - Boys Brigade Learning Centre</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #000000;
+            --secondary: #111111;
+            --white-section: #ffffff;
+            --light-gray: #f8f9fa;
+            --dark-gray: #1a1a1a;
+            --accent: #ffffff;
+            --accent-hover: #f0f0f0;
+            --text-white: #ffffff;
+            --text-black: #000000;
+            --text-gray: #666666;
+            --text-light-gray: rgba(255,255,255,0.7);
+            --border-light: #e5e5e5;
+            --border-dark: #333333;
+            --shadow-light: rgba(0,0,0,0.1);
+            --shadow-dark: rgba(0,0,0,0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: var(--text-white);
+            background-color: var(--primary);
+            overflow-x: hidden;
+            padding-top: 80px;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-white);
+        }
+
+        /* Section styles */
+        .white-section {
+            background-color: var(--white-section);
+            color: var(--text-black);
+        }
+
+        .white-section h1, .white-section h2, .white-section h3, .white-section h4, .white-section h5, .white-section h6 {
+            color: var(--text-black);
+        }
+
+        .white-section .intro-content p {
+            color: var(--text-gray);
+        }
+
+        .black-section {
+            background-color: var(--primary);
+            color: var(--text-white);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header styles */
+        header {
+            background: var(--primary);
+            color: var(--text-white);
+            padding: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-bottom: 1px solid transparent;
+        }
+
+        header.floating {
+            top: 1rem;
+            left: 3rem;
+            right: 3rem;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 95%;
+            transition: padding 0.3s ease;
+        }
+
+        header.floating .header-content {
+            padding: 0.75rem 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            color: var(--text-white);
+            gap: 0.5rem;
+            transition: transform 0.2s ease;
+        }
+
+        .logo i {
+            color: var(--accent);
+            font-size: 1.8rem;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-toggle {
+            display: none;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-white);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-toggle:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 0;
+        }
+
+        nav li {
+            position: relative;
+        }
+
+        nav > ul > li > a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            padding: 0.75rem 1.25rem;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            border-radius: 6px;
+            margin: 0 0.25rem;
+            position: relative;
+        }
+
+        nav > ul > li > a:hover {
+            color: var(--text-white);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        nav > ul > li > a.active {
+            color: var(--text-white);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Dropdown menu */
+        .dropdown {
+            position: absolute;
+            top: calc(100% + 0.5rem);
+            left: 0;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            min-width: 240px;
+            border-radius: 12px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px) scale(0.95);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 100;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0.75rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        nav li:hover .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+
+        .dropdown li {
+            margin: 0;
+            width: 100%;
+        }
+
+        .dropdown a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            padding: 0.75rem 1rem;
+            display: block;
+            transition: all 0.2s ease;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .dropdown a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-white);
+            transform: translateX(4px);
+        }
+
+        /* Page Header */
+        .page-header {
+            height: 50vh;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('images/photos/DSC05831.JPG');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .page-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(transparent, var(--primary));
+            z-index: 1;
+        }
+
+        .page-header-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            animation: fadeIn 1.5s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-white);
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+            line-height: 1.2;
+        }
+
+        .page-header p {
+            font-size: 1.3rem;
+            color: var(--text-light-gray);
+        }
+
+        /* Section styles */
+        section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            font-size: 2.5rem;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            margin: 1.5rem auto;
+            border-radius: 2px;
+        }
+
+        .intro-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .intro-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: var(--text-light-gray);
+        }
+
+        /* Location info grid */
+        .location-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
+        }
+
+        .location-card {
+            background-color: var(--dark-gray);
+            border-radius: 16px;
+            padding: 2.5rem;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .location-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.8s ease;
+        }
+
+        .location-card:hover::before {
+            left: 100%;
+        }
+
+        .location-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(255, 255, 255, 0.1);
+            background-color: var(--secondary);
+        }
+
+        .location-icon {
+            font-size: 3.5rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        }
+
+        .location-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--text-white);
+        }
+
+        .location-card p {
+            color: var(--text-light-gray);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .location-card .info-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.8rem;
+            color: var(--text-light-gray);
+        }
+
+        .location-card .info-item i {
+            color: var(--accent);
+            margin-right: 0.8rem;
+            font-size: 1.1rem;
+        }
+
+        /* Two column layout */
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-top: 3rem;
+        }
+
+        .two-column img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .two-column .content h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .two-column .content p {
+            color: var(--text-light-gray);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Map section */
+        .map-container {
+            background-color: var(--dark-gray);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-top: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .map-placeholder {
+            background: linear-gradient(135deg, var(--secondary), var(--dark-gray));
+            height: 400px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 1.5rem;
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+        }
+
+        .map-placeholder i {
+            font-size: 4rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .map-placeholder div {
+            text-align: center;
+        }
+
+        .map-placeholder h4 {
+            color: var(--text-white);
+            margin-bottom: 0.5rem;
+        }
+
+        .map-placeholder p {
+            color: var(--text-light-gray);
+        }
+
+        /* Button styles */
+        .btn {
+            display: inline-block;
+            background: transparent;
+            color: var(--accent);
+            padding: 1rem 2.2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            margin: 1rem 1rem 0 0;
+            transition: all 0.4s ease;
+            border: 2px solid var(--accent);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--accent);
+            transition: left 0.6s ease;
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            left: 0;
+        }
+
+        .btn:hover {
+            color: var(--text-black);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(255, 255, 255, 0.3);
+            border-color: var(--accent);
+        }
+
+        /* Black section button styles */
+        .black-section .btn {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .black-section .btn::before {
+            background: var(--accent);
+        }
+
+        .black-section .btn:hover {
+            color: var(--text-black);
+        }
+
+        /* White section button styles */
+        .white-section .btn {
+            color: var(--text-black);
+            border-color: var(--text-black);
+        }
+
+        .white-section .btn::before {
+            background: var(--text-black);
+        }
+
+        .white-section .btn:hover {
+            color: var(--text-white);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: var(--text-white);
+            padding: 4rem 0 1.5rem;
+            border-top: 1px solid #2a2a2a;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .footer-section h3 {
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid #2a2a2a;
+            position: relative;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        .footer-section p {
+            margin-bottom: 1.2rem;
+            color: var(--text-light-gray);
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-section i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--text-light-gray);
+            text-decoration: none;
+            transition: all 0.3s;
+            display: block;
+            padding: 0.3rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-links a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: -100%;
+            width: 100%;
+            height: 1px;
+            background: var(--accent);
+            transition: left 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+            padding-left: 10px;
+        }
+
+        .footer-links a:hover::before {
+            left: 0;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.2rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background-color: var(--dark-gray);
+            color: var(--text-white);
+            border-radius: 50%;
+            transition: all 0.3s;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #2a2a2a;
+        }
+
+        .social-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--accent);
+            transition: left 0.3s;
+            z-index: -1;
+        }
+
+        .social-links a:hover::before {
+            left: 0;
+        }
+
+        .social-links a:hover {
+            color: var(--text-black);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2.5rem;
+            border-top: 1px solid #2a2a2a;
+            color: var(--text-light-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Mobile responsive adjustments */
+        @media (max-width: 768px) {
+            header.floating {
+                left: 1rem;
+                right: 1rem;
+                top: 1rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            header.floating {
+                left: 0.5rem;
+                right: 0.5rem;
+                border-radius: 16px;
+            }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: block;
+            }
+
+            nav ul {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--primary);
+                padding: 1rem 0;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+                border-top: 1px solid #2a2a2a;
+            }
+
+            nav ul.show {
+                display: flex;
+            }
+
+            nav li {
+                margin: 0;
+                width: 100%;
+            }
+
+            nav > ul > li > a {
+                padding: 1rem 1.5rem;
+                border-bottom: 1px solid #2a2a2a;
+                margin: 0;
+                border-radius: 0;
+            }
+
+            .dropdown {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                background-color: rgba(26, 26, 26, 0.8);
+                min-width: auto;
+                margin-left: 0;
+                display: none;
+                border: none;
+                border-radius: 0;
+            }
+
+            nav li:hover .dropdown {
+                display: block;
+            }
+
+            .dropdown a {
+                color: var(--text-light-gray);
+                padding: 0.8rem 2rem;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .two-column {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .location-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-1 {
+            transition-delay: 0.2s;
+        }
+
+        .delay-2 {
+            transition-delay: 0.4s;
+        }
+
+        .delay-3 {
+            transition-delay: 0.6s;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--secondary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-hover);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                Boys Brigade Learning Centre
+            </div>
+            <button class="nav-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav>
+                <ul id="nav-menu">
+                    <li>
+                        <a href="index.html">Home</a>
+                    </li>
+                    <li>
+                        <a href="about.html">About</a>
+                        <ul class="dropdown">
+                            <li><a href="mission.html">Mission, Vision, Values</a></li>
+                            <li><a href="team.html">Our Team</a></li>
+                            <li><a href="background.html">Background of BBLC</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Our Programme</a>
+                        <ul class="dropdown">
+                            <li><a href="english.html">English Programme</a></li>
+                            <li><a href="new-plan.html">Computer Class</a></li>
+                            <li><a href="guitar-class.html">Guitar Class</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" class="active">Get Involved</a>
+                        <ul class="dropdown">
+                            <li><a href="donate.html">Donate</a></li>
+                            <li><a href="visit.html">Visit Us</a></li>
+                            <li><a href="volunteer.html">Volunteer</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="projects.html">Projects</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="page-header-content">
+            <h1>Visit Our Centre</h1>
+            <p>Come see our work in action and meet our amazing students</p>
+        </div>
+    </section>
+
+    <!-- Introduction Section -->
+    <section class="white-section">
+        <div class="container">
+            <h2 class="section-title">Welcome to BBLC</h2>
+            <div class="intro-content fade-in">
+                <p>We warmly welcome visitors who want to see our educational programs in action, meet our dedicated teachers, and interact with our enthusiastic students. Visiting our centre gives you a firsthand look at the transformative power of education in our community.</p>
+
+                <p>Whether you're interested in volunteering, making a donation, or simply learning more about our mission, a visit to our centre is an inspiring experience that showcases the real impact of your support.</p>
+            </div>
+
+            <!-- Image Gallery showing the centre -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem;">
+                <div class="fade-in delay-1" style="border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); position: relative;">
+                    <img src="images/photos/DSC05836.JPG" alt="BBLC classroom" style="width: 100%; height: 250px; object-fit: cover;">
+                    <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.8)); color: white; padding: 1.5rem;">
+                        <h4 style="margin-bottom: 0.5rem; color: white;">Our Classrooms</h4>
+                        <p style="font-size: 0.9rem; margin: 0; color: rgba(255,255,255,0.9);">Modern learning spaces equipped for success</p>
+                    </div>
+                </div>
+                <div class="fade-in delay-2" style="border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); position: relative;">
+                    <img src="images/photos/DSC05908.JPG" alt="Students learning" style="width: 100%; height: 250px; object-fit: cover;">
+                    <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.8)); color: white; padding: 1.5rem;">
+                        <h4 style="margin-bottom: 0.5rem; color: white;">Active Learning</h4>
+                        <p style="font-size: 0.9rem; margin: 0; color: rgba(255,255,255,0.9);">Engaging activities and interactive lessons</p>
+                    </div>
+                </div>
+                <div class="fade-in delay-3" style="border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); position: relative;">
+                    <img src="images/photos/DSC05854.JPG" alt="Community activities" style="width: 100%; height: 250px; object-fit: cover;">
+                    <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.8)); color: white; padding: 1.5rem;">
+                        <h4 style="margin-bottom: 0.5rem; color: white;">Community Spirit</h4>
+                        <p style="font-size: 0.9rem; margin: 0; color: rgba(255,255,255,0.9);">Building connections and friendships</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Information -->
+    <section class="black-section">
+        <div class="container">
+            <h2 class="section-title">How to Find Us</h2>
+            <div class="location-grid">
+                <div class="location-card fade-in">
+                    <div class="location-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Our Address</h3>
+                    <p>We're located in the heart of Phnom Penh, easily accessible by public transportation and private vehicle.</p>
+                    <div class="info-item">
+                        <i class="fas fa-home"></i>
+                        Boys Brigade Learning Centre
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-city"></i>
+                        Phnom Penh, Cambodia
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-phone"></i>
+                        +855 XXX XXX XXX
+                    </div>
+                </div>
+
+                <div class="location-card fade-in delay-1">
+                    <div class="location-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Visiting Hours</h3>
+                    <p>We welcome visitors during our operating hours. Please contact us in advance to schedule your visit.</p>
+                    <div class="info-item">
+                        <i class="fas fa-calendar-day"></i>
+                        Monday - Friday: 8:00 AM - 6:00 PM
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-calendar-day"></i>
+                        Saturday: 8:00 AM - 4:00 PM
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-times-circle"></i>
+                        Sunday: Closed
+                    </div>
+                </div>
+
+                <div class="location-card fade-in delay-2">
+                    <div class="location-icon">
+                        <i class="fas fa-route"></i>
+                    </div>
+                    <h3>Getting Here</h3>
+                    <p>Multiple transportation options are available to reach our centre, making it convenient for all visitors.</p>
+                    <div class="info-item">
+                        <i class="fas fa-bus"></i>
+                        Public bus routes available
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-motorcycle"></i>
+                        Tuk-tuk and motorbike accessible
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-car"></i>
+                        Parking space available
+                    </div>
+                </div>
+            </div>
+
+            <!-- Map section -->
+            <div class="map-container fade-in">
+                <h3 style="color: var(--text-white); margin-bottom: 1rem;">Find Us on the Map</h3>
+                <p style="color: var(--text-light-gray); margin-bottom: 1.5rem;">Our centre is conveniently located in Phnom Penh with easy access from all parts of the city.</p>
+                <div class="map-placeholder">
+                    <div>
+                        <i class="fas fa-map"></i>
+                        <h4>Interactive Map</h4>
+                        <p>Detailed location and directions will be provided upon visit request</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What to Expect Section -->
+    <section class="white-section">
+        <div class="container">
+            <div class="two-column fade-in">
+                <div>
+                    <img src="images/photos/DSC05833.JPG" alt="Students and visitors">
+                </div>
+                <div class="content">
+                    <h3>What to Expect During Your Visit</h3>
+                    <p>During your visit, you'll have the opportunity to observe classes in session, meet our dedicated teachers, and interact with our enthusiastic students. You'll see firsthand how our programs are making a real difference in their lives.</p>
+
+                    <p>We'll provide you with a guided tour of our facilities, including classrooms, computer lab, and common areas. You'll also learn about our different programs and how they're designed to meet the unique needs of each student.</p>
+
+                    <p>Many visitors leave feeling inspired by the positive energy and determination of our students, and often become long-term supporters of our mission.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Schedule Your Visit -->
+    <section class="black-section">
+        <div class="container">
+            <h2 class="section-title">Schedule Your Visit</h2>
+            <div class="intro-content fade-in">
+                <p>Ready to see the impact of quality education in our community? We'd love to welcome you to our centre and show you the amazing work happening here every day.</p>
+
+                <div style="background-color: var(--dark-gray); border-radius: 12px; padding: 3rem; border: 1px solid rgba(255, 255, 255, 0.1); margin-top: 3rem; text-align: left; max-width: 600px; margin-left: auto; margin-right: auto;">
+                    <h3 style="color: var(--accent); text-align: center; margin-bottom: 2rem;">Contact Us to Visit</h3>
+
+                    <div style="margin-bottom: 1.5rem;">
+                        <strong style="color: var(--text-white);"><i class="fas fa-envelope" style="color: var(--accent); margin-right: 0.5rem;"></i>Email:</strong><br>
+                        <span style="color: var(--text-light-gray);">visits@boysbrigadecambodia.org</span>
+                    </div>
+
+                    <div style="margin-bottom: 1.5rem;">
+                        <strong style="color: var(--text-white);"><i class="fas fa-phone" style="color: var(--accent); margin-right: 0.5rem;"></i>Phone:</strong><br>
+                        <span style="color: var(--text-light-gray);">+855 XXX XXX XXX</span>
+                    </div>
+
+                    <div style="margin-bottom: 1.5rem;">
+                        <strong style="color: var(--text-white);"><i class="fas fa-calendar-check" style="color: var(--accent); margin-right: 0.5rem;"></i>Best Time to Visit:</strong><br>
+                        <span style="color: var(--text-light-gray);">Weekday mornings (9:00 AM - 11:00 AM) when classes are most active</span>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid #2a2a2a;">
+                        <p style="color: var(--text-light-gray); margin: 0;">Please contact us at least 24 hours in advance to ensure we can provide you with the best possible experience.</p>
+                    </div>
+                </div>
+
+                <div style="margin-top: 3rem;">
+                    <a href="mailto:visits@boysbrigadecambodia.org" class="btn">Schedule Visit</a>
+                    <a href="volunteer.html" class="btn">Learn About Volunteering</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Phnom Penh, Cambodia</p>
+                    <p><i class="fas fa-phone"></i> +855 XXX XXX XXX</p>
+                    <p><i class="fas fa-envelope"></i> info@boysbrigadecambodia.org</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="english.html">Our Programme</a></li>
+                        <li><a href="visit.html">Visit Us</a></li>
+                        <li><a href="donate.html">Donate</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>About Pages</h3>
+                    <ul class="footer-links">
+                        <li><a href="mission.html">Mission, Vision, Values</a></li>
+                        <li><a href="team.html">Our Team</a></li>
+                        <li><a href="background.html">Background of BBLC</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Boys Brigade Learning Centre. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile navigation toggle
+        document.querySelector('.nav-toggle').addEventListener('click', function() {
+            document.getElementById('nav-menu').classList.toggle('show');
+        });
+
+        // Navbar scroll effect
+        let lastScrollY = window.scrollY;
+        const header = document.querySelector('header');
+
+        function updateHeader() {
+            const scrollY = window.scrollY;
+            const shouldFloat = scrollY > 100;
+
+            if (shouldFloat) {
+                header.classList.add('floating');
+            } else {
+                header.classList.remove('floating');
+            }
+
+            lastScrollY = scrollY;
+        }
+
+        window.addEventListener('scroll', updateHeader, { passive: true });
+
+        // Animation on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElems = document.querySelectorAll('.fade-in');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            });
+
+            fadeElems.forEach(elem => {
+                observer.observe(elem);
+            });
+        });
+    </script>
+</body>
+</html>

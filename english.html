@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Programme - Boys Brigade Learning Centre</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #000000;
+            --secondary: #111111;
+            --white-section: #ffffff;
+            --light-gray: #f8f9fa;
+            --dark-gray: #1a1a1a;
+            --accent: #ffffff;
+            --accent-hover: #f0f0f0;
+            --text-white: #ffffff;
+            --text-black: #000000;
+            --text-gray: #666666;
+            --text-light-gray: rgba(255,255,255,0.7);
+            --border-light: #e5e5e5;
+            --border-dark: #333333;
+            --shadow-light: rgba(0,0,0,0.1);
+            --shadow-dark: rgba(0,0,0,0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: var(--text-white);
+            background-color: var(--primary);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-white);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header styles */
+        header {
+            background: var(--primary);
+            color: var(--text-white);
+            padding: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-bottom: 1px solid transparent;
+        }
+
+        header.floating {
+            top: 1rem;
+            left: 3rem;
+            right: 3rem;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px var(--shadow-dark);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 95%;
+            transition: padding 0.3s ease;
+        }
+
+        header.floating .header-content {
+            padding: 0.75rem 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            color: var(--text-white);
+            gap: 0.5rem;
+            transition: transform 0.2s ease;
+        }
+
+        .logo i {
+            color: var(--accent);
+            font-size: 1.8rem;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-toggle {
+            display: none;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-white);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-toggle:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 0;
+        }
+
+        nav li {
+            position: relative;
+        }
+
+        nav > ul > li > a {
+            color: var(--text-light-gray);
+            text-decoration: none;
+            padding: 0.75rem 1.25rem;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            border-radius: 6px;
+            margin: 0 0.25rem;
+            position: relative;
+        }
+
+        nav > ul > li > a:hover {
+            color: var(--text-white);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        nav > ul > li > a.active {
+            color: var(--text-white);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Dropdown menu */
+        .dropdown {
+            position: absolute;
+            top: calc(100% + 0.5rem);
+            left: 0;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            min-width: 240px;
+            border-radius: 12px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px) scale(0.95);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 100;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0.75rem;
+            box-shadow: 0 20px 40px var(--shadow-dark);
+        }
+
+        nav li:hover .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+
+        .dropdown li {
+            margin: 0;
+            width: 100%;
+        }
+
+        .dropdown a {
+            color: var(--text-light-gray);
+            text-decoration: none;
+            padding: 0.75rem 1rem;
+            display: block;
+            transition: all 0.2s ease;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .dropdown a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-white);
+            transform: translateX(4px);
+        }
+
+        /* Page Header */
+        .page-header {
+            height: 50vh;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('images/photos/DSC05909.JPG');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .page-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(transparent, var(--primary));
+            z-index: 1;
+        }
+
+        .page-header-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            animation: fadeIn 1.5s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-white);
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+            line-height: 1.2;
+        }
+
+        .page-header p {
+            font-size: 1.3rem;
+            color: var(--text-light-gray);
+        }
+
+        /* Section styles */
+        section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            font-size: 2.5rem;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            margin: 1.5rem auto;
+            border-radius: 2px;
+        }
+
+        .intro-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .intro-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: var(--text-light-gray);
+        }
+
+        /* Course levels */
+        .levels-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .level-card {
+            background-color: var(--dark-gray);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px var(--shadow-dark);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid var(--border-dark);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .level-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px var(--shadow-dark);
+            background-color: var(--secondary);
+        }
+
+        .level-header {
+            background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+            color: var(--text-black);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .level-header h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .level-subtitle {
+            opacity: 0.9;
+            font-size: 1rem;
+        }
+
+        .level-content {
+            padding: 2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .level-features {
+            list-style: none;
+            margin: 1.5rem 0;
+            flex-grow: 1;
+        }
+
+        .level-features li {
+            padding: 0.5rem 0;
+            color: var(--text-light-gray);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .level-features li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* Program features */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 2rem;
+            background-color: var(--dark-gray);
+            border-radius: 12px;
+            border: 1px solid var(--border-dark);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px var(--shadow-dark);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--text-white);
+        }
+
+        .feature-card p {
+            color: var(--text-light-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Two column layout */
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .two-column img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px var(--shadow-dark);
+        }
+
+        .two-column .content h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .two-column .content p {
+            color: var(--text-light-gray);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Button styles */
+        .btn {
+            display: inline-block;
+            background: transparent;
+            color: var(--accent);
+            padding: 1rem 2.2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            margin: 1rem 1rem 0 0;
+            transition: all 0.4s ease;
+            border: 2px solid var(--accent);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--accent);
+            transition: left 0.6s ease;
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            left: 0;
+        }
+
+        .btn:hover {
+            color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(255, 255, 255, 0.3);
+            border-color: var(--accent);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+        }
+
+        .btn-outline::before {
+            background: var(--accent);
+        }
+
+        .btn-outline:hover {
+            color: var(--primary);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: var(--text-white);
+            padding: 4rem 0 1.5rem;
+            border-top: 1px solid var(--border-dark);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .footer-section h3 {
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid #2a2a2a;
+            position: relative;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        .footer-section p {
+            margin-bottom: 1.2rem;
+            color: var(--text-light-gray);
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-section i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--text-light-gray);
+            text-decoration: none;
+            transition: all 0.3s;
+            display: block;
+            padding: 0.3rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-links a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: -100%;
+            width: 100%;
+            height: 1px;
+            background: var(--accent);
+            transition: left 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+            padding-left: 10px;
+        }
+
+        .footer-links a:hover::before {
+            left: 0;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.2rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background-color: var(--dark-gray);
+            color: var(--text-white);
+            border-radius: 50%;
+            transition: all 0.3s;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--border-dark);
+        }
+
+        .social-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--accent);
+            transition: left 0.3s;
+            z-index: -1;
+        }
+
+        .social-links a:hover::before {
+            left: 0;
+        }
+
+        .social-links a:hover {
+            color: var(--text-black);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2.5rem;
+            border-top: 1px solid var(--border-dark);
+            color: var(--text-light-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Mobile responsive adjustments */
+                /* Section alternation styles */
+        .white-section {
+            background-color: var(--white-section);
+            color: var(--text-black);
+        }
+
+        .white-section h1,
+        .white-section h2,
+        .white-section h3,
+        .white-section h4,
+        .white-section h5,
+        .white-section h6 {
+            color: var(--text-black);
+        }
+
+        .white-section p,
+        .white-section .intro-content p {
+            color: var(--text-gray);
+        }
+
+        .white-section .level-features li {
+            color: var(--text-gray);
+        }
+
+        .white-section .feature-card {
+            background-color: var(--light-gray);
+            border: 1px solid var(--border-light);
+        }
+
+        .white-section .feature-card h3 {
+            color: var(--text-black);
+        }
+
+        .white-section .feature-card p {
+            color: var(--text-gray);
+        }
+
+        .white-section .feature-icon {
+            color: var(--text-black);
+        }
+
+        .white-section .level-card {
+            background-color: var(--light-gray);
+            border: 1px solid var(--border-light);
+        }
+
+        .white-section .level-card:hover {
+            box-shadow: 0 15px 35px var(--shadow-light);
+        }
+
+        .white-section .feature-card:hover {
+            box-shadow: 0 10px 25px var(--shadow-light);
+        }
+
+        .white-section .section-title::after {
+            background: linear-gradient(90deg, transparent, var(--text-black), transparent);
+        }
+
+        /* White section button styles */
+        .white-section .btn {
+            color: var(--text-black);
+            border-color: var(--text-black);
+        }
+
+        .white-section .btn::before {
+            background: var(--text-black);
+        }
+
+        .white-section .btn:hover {
+            color: var(--white-section);
+            box-shadow: 0 12px 25px var(--shadow-light);
+        }
+
+        .white-section .btn-outline {
+            color: var(--text-black);
+            border-color: var(--text-black);
+        }
+
+        .white-section .btn-outline::before {
+            background: var(--text-black);
+        }
+
+        .white-section .btn-outline:hover {
+            color: var(--white-section);
+        }
+
+        .black-section {
+            background-color: var(--primary);
+            color: var(--text-white);
+        }
+
+        /* Mobile responsive adjustments */
+        @media (max-width: 768px) {
+            header.floating {
+                left: 1rem;
+                right: 1rem;
+                top: 1rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            header.floating {
+                left: 0.5rem;
+                right: 0.5rem;
+                border-radius: 16px;
+            }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: block;
+            }
+
+            nav ul {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--primary);
+                padding: 1rem 0;
+                box-shadow: 0 5px 10px var(--shadow-dark);
+                border-top: 1px solid var(--border-dark);
+            }
+
+            nav ul.show {
+                display: flex;
+            }
+
+            nav li {
+                margin: 0;
+                width: 100%;
+            }
+
+            nav > ul > li > a {
+                padding: 1rem 1.5rem;
+                border-bottom: 1px solid var(--border-dark);
+            }
+
+            .dropdown {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                background-color: rgba(0, 0, 0, 0.8);
+                min-width: auto;
+                margin-left: 0;
+                display: none;
+                border: none;
+                border-radius: 0;
+            }
+
+            nav li:hover .dropdown {
+                display: block;
+            }
+
+            .dropdown a {
+                color: var(--text-light-gray);
+                padding: 0.8rem 2rem;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .two-column {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .levels-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-1 {
+            transition-delay: 0.2s;
+        }
+
+        .delay-2 {
+            transition-delay: 0.4s;
+        }
+
+        .delay-3 {
+            transition-delay: 0.6s;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--secondary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-hover);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                Boys Brigade Learning Centre
+            </div>
+            <button class="nav-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav>
+                <ul id="nav-menu">
+                    <li>
+                        <a href="index.html">Home</a>
+                    </li>
+                    <li>
+                        <a href="#">About</a>
+                        <ul class="dropdown">
+                            <li><a href="mission.html">Mission, Vision, Values</a></li>
+                            <li><a href="team.html">Our Team</a></li>
+                            <li><a href="background.html">Background of BBLC</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Our Programme</a>
+                        <ul class="dropdown">
+                            <li><a href="english.html">English Programme</a></li>
+                            <li><a href="new-plan.html">Computer Class</a></li>
+                            <li><a href="guitar-class.html">Guitar Class</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Get Involved</a>
+                        <ul class="dropdown">
+                            <li><a href="donate.html">Donate</a></li>
+                            <li><a href="visit.html">Visit Us</a></li>
+                            <li><a href="volunteer.html">Volunteer</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="projects.html">Projects</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="page-header-content">
+            <h1>English Programme</h1>
+            <p>Building communication skills for brighter futures</p>
+        </div>
+    </section>
+
+    <!-- Introduction Section -->
+    <section class="white-section">
+        <div class="container">
+            <h2 class="section-title">Our English Programme</h2>
+            <div class="intro-content fade-in">
+                <p>Our English programme is the cornerstone of BBLC's educational offerings, designed to provide students with the essential communication skills they need to succeed in today's globalized world. We offer comprehensive English language instruction across multiple levels, ensuring that every student can progress at their own pace.</p>
+
+                <p>Through interactive lessons, practical exercises, and real-world applications, our students develop confidence in speaking, reading, writing, and listening in English. Our experienced teachers use modern teaching methods to make learning engaging and effective.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Levels Section -->
+    <section class="black-section">
+        <div class="container">
+            <h2 class="section-title">Course Levels</h2>
+            <div class="levels-grid">
+                <div class="level-card fade-in">
+                    <div class="level-header">
+                        <h3>Beginner Level</h3>
+                        <div class="level-subtitle">Foundation English</div>
+                    </div>
+                    <div class="level-content">
+                        <p>Perfect for students with little to no English background. We start with the basics and build a strong foundation.</p>
+                        <ul class="level-features">
+                            <li>English alphabet and phonics</li>
+                            <li>Basic vocabulary and common phrases</li>
+                            <li>Simple grammar structures</li>
+                            <li>Everyday conversation practice</li>
+                            <li>Reading simple texts</li>
+                        </ul>
+                        <strong style="color: var(--accent);">Duration: 6 months</strong>
+                    </div>
+                </div>
+
+                <div class="level-card fade-in delay-1">
+                    <div class="level-header">
+                        <h3>Intermediate Level</h3>
+                        <div class="level-subtitle">Practical English</div>
+                    </div>
+                    <div class="level-content">
+                        <p>For students who have mastered the basics and are ready to expand their skills for practical use.</p>
+                        <ul class="level-features">
+                            <li>Expanded vocabulary and expressions</li>
+                            <li>Complex grammar and sentence structures</li>
+                            <li>Reading comprehension skills</li>
+                            <li>Writing paragraphs and short essays</li>
+                            <li>Listening to English media</li>
+                        </ul>
+                        <strong style="color: var(--accent);">Duration: 8 months</strong>
+                    </div>
+                </div>
+
+                <div class="level-card fade-in delay-2">
+                    <div class="level-header">
+                        <h3>Advanced Level</h3>
+                        <div class="level-subtitle">Professional English</div>
+                    </div>
+                    <div class="level-content">
+                        <p>Our most advanced course, preparing students for academic or professional environments.</p>
+                        <ul class="level-features">
+                            <li>Advanced vocabulary and idioms</li>
+                            <li>Professional communication skills</li>
+                            <li>Academic writing and presentations</li>
+                            <li>Critical thinking and discussion</li>
+                            <li>Preparation for English proficiency tests</li>
+                        </ul>
+                        <strong style="color: var(--accent);">Duration: 10 months</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Program Features Section -->
+    <section class="white-section">
+        <div class="container">
+            <h2 class="section-title">What Makes Our Programme Special</h2>
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Small Class Sizes</h3>
+                    <p>Maximum 15 students per class ensures personalized attention and better learning outcomes.</p>
+                </div>
+
+                <div class="feature-card fade-in delay-1">
+                    <div class="feature-icon">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <h3>Experienced Teachers</h3>
+                    <p>Our qualified instructors use proven teaching methods and bring years of experience.</p>
+                </div>
+
+                <div class="feature-card fade-in delay-2">
+                    <div class="feature-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3>Comprehensive Materials</h3>
+                    <p>Students receive textbooks, workbooks, and supplementary materials at no additional cost.</p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>Interactive Learning</h3>
+                    <p>Focus on conversation practice and real-world communication scenarios.</p>
+                </div>
+
+                <div class="feature-card fade-in delay-1">
+                    <div class="feature-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h3>Certificates</h3>
+                    <p>Students receive completion certificates recognized by local employers and institutions.</p>
+                </div>
+
+                <div class="feature-card fade-in delay-2">
+                    <div class="feature-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Completely Free</h3>
+                    <p>All our English classes are provided free of charge to ensure accessibility for all students.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Stories Section -->
+    <section class="black-section">
+        <div class="container">
+            <div class="two-column fade-in">
+                <div>
+                    <img src="images/photos/DSC05932.JPG" alt="English class in session">
+                </div>
+                <div class="content">
+                    <h3>Student Success Stories</h3>
+                    <p>Our English programme has opened doors for countless students, helping them secure better job opportunities, continue their education, and communicate confidently with people from around the world.</p>
+
+                    <p>Many of our graduates have gone on to work in the tourism industry, international companies, and non-profit organizations. Some have even started their own businesses or pursued higher education opportunities that require English proficiency.</p>
+
+                    <p>The skills they learn here don't just help them academicallythey build confidence and open up a world of possibilities for personal and professional growth.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Class Schedule Section -->
+    <section class="white-section">
+        <div class="container">
+            <h2 class="section-title">Class Schedule & Information</h2>
+            <div class="intro-content fade-in">
+                <div style="background-color: var(--light-gray); border-radius: 12px; padding: 3rem; border: 1px solid var(--border-light); text-align: left; max-width: 600px; margin: 0 auto;">
+                    <h3 style="color: var(--text-black); text-align: center; margin-bottom: 2rem;">Current Schedule</h3>
+
+                    <div style="margin-bottom: 1.5rem;">
+                        <strong style="color: var(--text-black);">Morning Classes:</strong><br>
+                        <span style="color: var(--text-gray);">Monday, Wednesday, Friday: 8:00 AM - 10:00 AM</span>
+                    </div>
+
+                    <div style="margin-bottom: 1.5rem;">
+                        <strong style="color: var(--text-black);">Evening Classes:</strong><br>
+                        <span style="color: var(--text-gray);">Tuesday, Thursday, Saturday: 6:00 PM - 8:00 PM</span>
+                    </div>
+
+                    <div style="margin-bottom: 1.5rem;">
+                        <strong style="color: var(--text-black);">Class Size:</strong><br>
+                        <span style="color: var(--text-gray);">Maximum 15 students per class</span>
+                    </div>
+
+                    <div style="margin-bottom: 1.5rem;">
+                        <strong style="color: var(--text-black);">Age Range:</strong><br>
+                        <span style="color: var(--text-gray);">12 years and above</span>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border-light);">
+                        <strong style="color: var(--text-black); font-size: 1.2rem;">All classes are FREE!</strong>
+                    </div>
+                </div>
+
+                <div style="margin-top: 3rem;">
+                    <a href="visit.html" class="btn">Visit Our Centre</a>
+                    <a href="volunteer.html" class="btn btn-outline">Help Our Programme</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Phnom Penh, Cambodia</p>
+                    <p><i class="fas fa-phone"></i> +855 XXX XXX XXX</p>
+                    <p><i class="fas fa-envelope"></i> info@boysbrigadecambodia.org</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="programme.html">Our Programme</a></li>
+                        <li><a href="visit.html">Visit Us</a></li>
+                        <li><a href="donate.html">Donate</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Our Programs</h3>
+                    <ul class="footer-links">
+                        <li><a href="english.html">English Programme</a></li>
+                        <li><a href="new-plan.html">Computer Class</a></li>
+                        <li><a href="guitar-class.html">Guitar Class</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Boys Brigade Learning Centre. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile navigation toggle
+        document.querySelector('.nav-toggle').addEventListener('click', function() {
+            document.getElementById('nav-menu').classList.toggle('show');
+        });
+
+        // Navbar scroll effect
+        let lastScrollY = window.scrollY;
+        const header = document.querySelector('header');
+
+        function updateHeader() {
+            const scrollY = window.scrollY;
+            const shouldFloat = scrollY > 100;
+
+            if (shouldFloat) {
+                header.classList.add('floating');
+            } else {
+                header.classList.remove('floating');
+            }
+
+            lastScrollY = scrollY;
+        }
+
+        window.addEventListener('scroll', updateHeader, { passive: true });
+
+        // Animation on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElems = document.querySelectorAll('.fade-in');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            });
+
+            fadeElems.forEach(elem => {
+                observer.observe(elem);
+            });
+        });
+    </script>
+</body>
+</html>

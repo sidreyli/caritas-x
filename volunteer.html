@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteer - Boys Brigade Learning Centre</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #000000;
+            --secondary: #111111;
+            --white-section: #ffffff;
+            --light-gray: #f8f9fa;
+            --dark-gray: #1a1a1a;
+            --accent: #ffffff;
+            --accent-hover: #f0f0f0;
+            --text-white: #ffffff;
+            --text-black: #000000;
+            --text-gray: #666666;
+            --text-light-gray: rgba(255,255,255,0.7);
+            --border-light: #e5e5e5;
+            --border-dark: #333333;
+            --shadow-light: rgba(0,0,0,0.1);
+            --shadow-dark: rgba(0,0,0,0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: var(--text-white);
+            background-color: var(--primary);
+            overflow-x: hidden;
+            padding-top: 80px;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-white);
+        }
+
+        /* Section styles */
+        .white-section {
+            background-color: var(--white-section);
+            color: var(--text-black);
+        }
+
+        .white-section h1, .white-section h2, .white-section h3, .white-section h4, .white-section h5, .white-section h6 {
+            color: var(--text-black);
+        }
+
+        .white-section .intro-content p {
+            color: var(--text-gray);
+        }
+
+        .black-section {
+            background-color: var(--primary);
+            color: var(--text-white);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header styles */
+        header {
+            background: var(--primary);
+            color: var(--text-white);
+            padding: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-bottom: 1px solid transparent;
+        }
+
+        header.floating {
+            top: 1rem;
+            left: 3rem;
+            right: 3rem;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 95%;
+            transition: padding 0.3s ease;
+        }
+
+        header.floating .header-content {
+            padding: 0.75rem 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            color: var(--text-white);
+            gap: 0.5rem;
+            transition: transform 0.2s ease;
+        }
+
+        .logo i {
+            color: var(--accent);
+            font-size: 1.8rem;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-toggle {
+            display: none;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-white);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-toggle:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 0;
+        }
+
+        nav li {
+            position: relative;
+        }
+
+        nav > ul > li > a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            padding: 0.75rem 1.25rem;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            border-radius: 6px;
+            margin: 0 0.25rem;
+            position: relative;
+        }
+
+        nav > ul > li > a:hover {
+            color: var(--text-white);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        nav > ul > li > a.active {
+            color: var(--text-white);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Dropdown menu */
+        .dropdown {
+            position: absolute;
+            top: calc(100% + 0.5rem);
+            left: 0;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            min-width: 240px;
+            border-radius: 12px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px) scale(0.95);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 100;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0.75rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        nav li:hover .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+
+        .dropdown li {
+            margin: 0;
+            width: 100%;
+        }
+
+        .dropdown a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            padding: 0.75rem 1rem;
+            display: block;
+            transition: all 0.2s ease;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .dropdown a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-white);
+            transform: translateX(4px);
+        }
+
+        /* Page Header */
+        .page-header {
+            height: 50vh;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('images/photos/DSC05882.JPG');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .page-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(transparent, var(--primary));
+            z-index: 1;
+        }
+
+        .page-header-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            animation: fadeIn 1.5s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-white);
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+            line-height: 1.2;
+        }
+
+        .page-header p {
+            font-size: 1.3rem;
+            color: var(--text-light-gray);
+        }
+
+        /* Section styles */
+        section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            font-size: 2.5rem;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            margin: 1.5rem auto;
+            border-radius: 2px;
+        }
+
+        .intro-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .intro-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: var(--text-light-gray);
+        }
+
+        /* Volunteer opportunities grid */
+        .opportunities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
+        }
+
+        .opportunity-card {
+            background-color: var(--dark-gray);
+            border-radius: 16px;
+            padding: 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .opportunity-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.8s ease;
+        }
+
+        .opportunity-card:hover::before {
+            left: 100%;
+        }
+
+        .opportunity-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(255, 255, 255, 0.1);
+            background-color: var(--secondary);
+        }
+
+        .opportunity-icon {
+            font-size: 3.5rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        }
+
+        .opportunity-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--text-white);
+        }
+
+        .opportunity-card p {
+            color: var(--text-light-gray);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .opportunity-card .requirements {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .opportunity-card .requirements li {
+            color: var(--text-light-gray);
+            padding: 0.3rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .opportunity-card .requirements li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .opportunity-card .commitment {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1.5rem;
+            border-left: 3px solid var(--accent);
+        }
+
+        .opportunity-card .commitment strong {
+            color: var(--accent);
+        }
+
+        /* Two column layout */
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-top: 3rem;
+        }
+
+        .two-column img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .two-column .content h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .two-column .content p {
+            color: var(--text-light-gray);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Impact stats */
+        .impact-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 2rem 1rem;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--accent);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-light-gray);
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        /* Application process */
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .process-step {
+            text-align: center;
+            padding: 2rem 1rem;
+            position: relative;
+        }
+
+        .process-step::before {
+            content: attr(data-step);
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: var(--accent);
+            color: var(--text-black);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .process-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .process-step h4 {
+            color: var(--text-white);
+            margin-bottom: 1rem;
+        }
+
+        .process-step p {
+            color: var(--text-light-gray);
+            font-size: 0.95rem;
+        }
+
+        /* Button styles */
+        .btn {
+            display: inline-block;
+            background: transparent;
+            color: var(--accent);
+            padding: 1rem 2.2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            margin: 1rem 1rem 0 0;
+            transition: all 0.4s ease;
+            border: 2px solid var(--accent);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--accent);
+            transition: left 0.6s ease;
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            left: 0;
+        }
+
+        .btn:hover {
+            color: var(--text-black);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(255, 255, 255, 0.3);
+            border-color: var(--accent);
+        }
+
+        /* Black section button styles */
+        .black-section .btn {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .black-section .btn::before {
+            background: var(--accent);
+        }
+
+        .black-section .btn:hover {
+            color: var(--text-black);
+        }
+
+        /* White section button styles */
+        .white-section .btn {
+            color: var(--text-black);
+            border-color: var(--text-black);
+        }
+
+        .white-section .btn::before {
+            background: var(--text-black);
+        }
+
+        .white-section .btn:hover {
+            color: var(--text-white);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: var(--text-white);
+            padding: 4rem 0 1.5rem;
+            border-top: 1px solid #2a2a2a;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .footer-section h3 {
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid #2a2a2a;
+            position: relative;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        .footer-section p {
+            margin-bottom: 1.2rem;
+            color: var(--text-light-gray);
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-section i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--text-light-gray);
+            text-decoration: none;
+            transition: all 0.3s;
+            display: block;
+            padding: 0.3rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-links a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: -100%;
+            width: 100%;
+            height: 1px;
+            background: var(--accent);
+            transition: left 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+            padding-left: 10px;
+        }
+
+        .footer-links a:hover::before {
+            left: 0;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.2rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background-color: var(--dark-gray);
+            color: var(--text-white);
+            border-radius: 50%;
+            transition: all 0.3s;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #2a2a2a;
+        }
+
+        .social-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--accent);
+            transition: left 0.3s;
+            z-index: -1;
+        }
+
+        .social-links a:hover::before {
+            left: 0;
+        }
+
+        .social-links a:hover {
+            color: var(--text-black);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2.5rem;
+            border-top: 1px solid #2a2a2a;
+            color: var(--text-light-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Mobile responsive adjustments */
+        @media (max-width: 768px) {
+            header.floating {
+                left: 1rem;
+                right: 1rem;
+                top: 1rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            header.floating {
+                left: 0.5rem;
+                right: 0.5rem;
+                border-radius: 16px;
+            }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: block;
+            }
+
+            nav ul {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--primary);
+                padding: 1rem 0;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+                border-top: 1px solid #2a2a2a;
+            }
+
+            nav ul.show {
+                display: flex;
+            }
+
+            nav li {
+                margin: 0;
+                width: 100%;
+            }
+
+            nav > ul > li > a {
+                padding: 1rem 1.5rem;
+                border-bottom: 1px solid #2a2a2a;
+                margin: 0;
+                border-radius: 0;
+            }
+
+            .dropdown {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                background-color: rgba(26, 26, 26, 0.8);
+                min-width: auto;
+                margin-left: 0;
+                display: none;
+                border: none;
+                border-radius: 0;
+            }
+
+            nav li:hover .dropdown {
+                display: block;
+            }
+
+            .dropdown a {
+                color: var(--text-light-gray);
+                padding: 0.8rem 2rem;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .two-column {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .opportunities-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .impact-stats {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-1 {
+            transition-delay: 0.2s;
+        }
+
+        .delay-2 {
+            transition-delay: 0.4s;
+        }
+
+        .delay-3 {
+            transition-delay: 0.6s;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--secondary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-hover);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                Boys Brigade Learning Centre
+            </div>
+            <button class="nav-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav>
+                <ul id="nav-menu">
+                    <li>
+                        <a href="index.html">Home</a>
+                    </li>
+                    <li>
+                        <a href="about.html">About</a>
+                        <ul class="dropdown">
+                            <li><a href="mission.html">Mission, Vision, Values</a></li>
+                            <li><a href="team.html">Our Team</a></li>
+                            <li><a href="background.html">Background of BBLC</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Our Programme</a>
+                        <ul class="dropdown">
+                            <li><a href="english.html">English Programme</a></li>
+                            <li><a href="new-plan.html">Computer Class</a></li>
+                            <li><a href="guitar-class.html">Guitar Class</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" class="active">Get Involved</a>
+                        <ul class="dropdown">
+                            <li><a href="donate.html">Donate</a></li>
+                            <li><a href="visit.html">Visit Us</a></li>
+                            <li><a href="volunteer.html">Volunteer</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="projects.html">Projects</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="page-header-content">
+            <h1>Join Our Team</h1>
+            <p>Make a difference in the lives of Cambodian students through volunteering</p>
+        </div>
+    </section>
+
+    <!-- Introduction Section -->
+    <section class="white-section">
+        <div class="container">
+            <h2 class="section-title">Why Volunteer with Us?</h2>
+            <div class="intro-content fade-in">
+                <p>Volunteering at Boys Brigade Learning Centre is more than just giving your timeit's about being part of a transformative experience that changes lives, including your own. Our volunteers play a crucial role in empowering students to break the cycle of poverty through education.</p>
+
+                <p>Whether you're a teacher, professional, student, or simply someone passionate about making a difference, there are many ways to contribute your skills and time to our mission.</p>
+            </div>
+
+            <!-- Impact stats -->
+            <div class="impact-stats fade-in">
+                <div class="stat-item">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Active Volunteers</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">300+</div>
+                    <div class="stat-label">Students Helped</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">5+</div>
+                    <div class="stat-label">Years of Impact</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">15</div>
+                    <div class="stat-label">Different Countries</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Volunteer Opportunities -->
+    <section class="black-section">
+        <div class="container">
+            <h2 class="section-title">Volunteer Opportunities</h2>
+            <div class="opportunities-grid">
+                <div class="opportunity-card fade-in">
+                    <div class="opportunity-icon">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <h3>English Teachers</h3>
+                    <p>Lead English classes for students of all levels, from beginners to advanced. Help students develop communication skills that will open doors to better opportunities.</p>
+                    <ul class="requirements">
+                        <li>Native or fluent English speaker</li>
+                        <li>Teaching experience preferred but not required</li>
+                        <li>Patience and enthusiasm for working with students</li>
+                        <li>Cultural sensitivity and adaptability</li>
+                    </ul>
+                    <div class="commitment">
+                        <strong>Time Commitment:</strong> Minimum 3 months, 2-4 hours per week
+                    </div>
+                </div>
+
+                <div class="opportunity-card fade-in delay-1">
+                    <div class="opportunity-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3>Computer Skills Instructor</h3>
+                    <p>Teach basic computer literacy, Microsoft Office, and digital skills. Help students develop technological competency essential for modern careers.</p>
+                    <ul class="requirements">
+                        <li>Proficiency with computers and software</li>
+                        <li>Ability to explain technical concepts clearly</li>
+                        <li>Experience with educational technology preferred</li>
+                        <li>Patience with different learning speeds</li>
+                    </ul>
+                    <div class="commitment">
+                        <strong>Time Commitment:</strong> Minimum 2 months, 3-5 hours per week
+                    </div>
+                </div>
+
+                <div class="opportunity-card fade-in delay-2">
+                    <div class="opportunity-icon">
+                        <i class="fas fa-users-cog"></i>
+                    </div>
+                    <h3>Administrative Support</h3>
+                    <p>Assist with program coordination, student records, volunteer management, and general administrative tasks that keep our center running smoothly.</p>
+                    <ul class="requirements">
+                        <li>Strong organizational skills</li>
+                        <li>Basic computer proficiency</li>
+                        <li>Attention to detail</li>
+                        <li>Good communication skills</li>
+                    </ul>
+                    <div class="commitment">
+                        <strong>Time Commitment:</strong> Flexible, 2-6 hours per week
+                    </div>
+                </div>
+
+                <div class="opportunity-card fade-in">
+                    <div class="opportunity-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Mentorship Program</h3>
+                    <p>Provide one-on-one guidance and support to students, helping them with academic goals, career planning, and personal development.</p>
+                    <ul class="requirements">
+                        <li>Life experience and wisdom to share</li>
+                        <li>Good listening and communication skills</li>
+                        <li>Commitment to building relationships</li>
+                        <li>Cultural awareness and respect</li>
+                    </ul>
+                    <div class="commitment">
+                        <strong>Time Commitment:</strong> Minimum 6 months, 2-3 hours per week
+                    </div>
+                </div>
+
+                <div class="opportunity-card fade-in delay-1">
+                    <div class="opportunity-icon">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <h3>Media & Communications</h3>
+                    <p>Help document our programs, create content for our website and social media, and assist with fundraising materials and communications.</p>
+                    <ul class="requirements">
+                        <li>Photography or videography skills</li>
+                        <li>Social media experience</li>
+                        <li>Creative writing abilities</li>
+                        <li>Basic design skills (preferred)</li>
+                    </ul>
+                    <div class="commitment">
+                        <strong>Time Commitment:</strong> Flexible, project-based
+                    </div>
+                </div>
+
+                <div class="opportunity-card fade-in delay-2">
+                    <div class="opportunity-icon">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <h3>Creative Arts Instructor</h3>
+                    <p>Teach music, art, drama, or other creative subjects. Help students express themselves and develop confidence through artistic activities.</p>
+                    <ul class="requirements">
+                        <li>Skill in music, art, or performing arts</li>
+                        <li>Ability to work with groups</li>
+                        <li>Creativity in lesson planning</li>
+                        <li>Enthusiasm for the arts</li>
+                    </ul>
+                    <div class="commitment">
+                        <strong>Time Commitment:</strong> Minimum 2 months, 2-4 hours per week
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Volunteer Experience -->
+    <section class="white-section">
+        <div class="container">
+            <div class="two-column fade-in">
+                <div>
+                    <img src="images/photos/DSC05891.JPG" alt="Volunteer teaching students">
+                </div>
+                <div class="content">
+                    <h3>The Volunteer Experience</h3>
+                    <p>Our volunteers consistently tell us that their time at BBLC has been one of the most rewarding experiences of their lives. You'll work alongside dedicated local staff and form meaningful connections with students who are eager to learn and grow.</p>
+
+                    <p>We provide comprehensive orientation and ongoing support to ensure you feel confident and prepared. You'll receive training on our teaching methods, cultural context, and how to work effectively with our student population.</p>
+
+                    <p>Many volunteers extend their stay or return for additional terms because of the strong bonds they form and the visible impact they see in their students' progress.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Application Process -->
+    <section class="black-section">
+        <div class="container">
+            <h2 class="section-title">How to Apply</h2>
+            <div class="intro-content fade-in">
+                <p>Our application process is designed to ensure a good match between volunteers and our needs, setting everyone up for a successful and meaningful experience.</p>
+            </div>
+
+            <div class="process-steps fade-in">
+                <div class="process-step" data-step="1">
+                    <div class="process-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h4>Submit Application</h4>
+                    <p>Complete our online application form with your background, skills, interests, and availability. Include any relevant experience and motivation for volunteering.</p>
+                </div>
+
+                <div class="process-step" data-step="2">
+                    <div class="process-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h4>Interview</h4>
+                    <p>Participate in a virtual or in-person interview where we'll discuss your goals, our programs, and how we can work together effectively.</p>
+                </div>
+
+                <div class="process-step" data-step="3">
+                    <div class="process-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h4>Background Check</h4>
+                    <p>Complete a background check and provide references. This helps us ensure the safety and security of our students and volunteers.</p>
+                </div>
+
+                <div class="process-step" data-step="4">
+                    <div class="process-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h4>Orientation</h4>
+                    <p>Attend our comprehensive orientation session covering our programs, cultural context, teaching methods, and expectations.</p>
+                </div>
+
+                <div class="process-step" data-step="5">
+                    <div class="process-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h4>Start Volunteering</h4>
+                    <p>Begin your volunteer assignment with ongoing support and regular check-ins to ensure a positive experience for everyone.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial Section -->
+    <section class="white-section">
+        <div class="container">
+            <div class="two-column fade-in">
+                <div class="content">
+                    <h3>Volunteer Testimonials</h3>
+                    <p><em>"Volunteering at BBLC has been life-changing. Seeing the progress my students made in just three months, and knowing I played a part in opening new opportunities for them, is incredibly fulfilling."</em></p>
+                    <p><strong>- Sarah, English Teacher Volunteer from Australia</strong></p>
+
+                    <p><em>"The students' enthusiasm for learning is contagious. Every day I looked forward to coming to the centre and seeing their bright faces eager to improve their computer skills."</em></p>
+                    <p><strong>- Mark, IT Skills Volunteer from Canada</strong></p>
+
+                    <p><em>"I came to volunteer for 2 months and ended up staying for 8. The connections I made with the students and staff became like family to me."</em></p>
+                    <p><strong>- Lisa, Administrative Volunteer from the UK</strong></p>
+                </div>
+                <div>
+                    <img src="images/photos/DSC05876.JPG" alt="Volunteers with students">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="black-section">
+        <div class="container">
+            <h2 class="section-title">Ready to Make a Difference?</h2>
+            <div class="intro-content fade-in">
+                <p>Join our community of dedicated volunteers and help us empower the next generation of Cambodian students. Your skills, time, and passion can make a real difference in young lives.</p>
+
+                <div style="background-color: var(--dark-gray); border-radius: 12px; padding: 3rem; border: 1px solid rgba(255, 255, 255, 0.1); margin-top: 3rem; text-align: left; max-width: 600px; margin-left: auto; margin-right: auto;">
+                    <h3 style="color: var(--accent); text-align: center; margin-bottom: 2rem;">Get Started Today</h3>
+
+                    <div style="margin-bottom: 1.5rem;">
+                        <strong style="color: var(--text-white);"><i class="fas fa-envelope" style="color: var(--accent); margin-right: 0.5rem;"></i>Volunteer Coordinator:</strong><br>
+                        <span style="color: var(--text-light-gray);">volunteers@boysbrigadecambodia.org</span>
+                    </div>
+
+                    <div style="margin-bottom: 1.5rem;">
+                        <strong style="color: var(--text-white);"><i class="fas fa-phone" style="color: var(--accent); margin-right: 0.5rem;"></i>Phone:</strong><br>
+                        <span style="color: var(--text-light-gray);">+855 XXX XXX XXX</span>
+                    </div>
+
+                    <div style="margin-bottom: 1.5rem;">
+                        <strong style="color: var(--text-white);"><i class="fas fa-clock" style="color: var(--accent); margin-right: 0.5rem;"></i>Application Timeline:</strong><br>
+                        <span style="color: var(--text-light-gray);">Allow 2-3 weeks from application to start date</span>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid #2a2a2a;">
+                        <p style="color: var(--text-light-gray); margin: 0;">We accept applications year-round and welcome volunteers of all backgrounds and experience levels.</p>
+                    </div>
+                </div>
+
+                <div style="margin-top: 3rem;">
+                    <a href="mailto:volunteers@boysbrigadecambodia.org" class="btn">Apply Now</a>
+                    <a href="visit.html" class="btn">Visit First</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Phnom Penh, Cambodia</p>
+                    <p><i class="fas fa-phone"></i> +855 XXX XXX XXX</p>
+                    <p><i class="fas fa-envelope"></i> info@boysbrigadecambodia.org</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="english.html">Our Programme</a></li>
+                        <li><a href="visit.html">Visit Us</a></li>
+                        <li><a href="donate.html">Donate</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>About Pages</h3>
+                    <ul class="footer-links">
+                        <li><a href="mission.html">Mission, Vision, Values</a></li>
+                        <li><a href="team.html">Our Team</a></li>
+                        <li><a href="background.html">Background of BBLC</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Boys Brigade Learning Centre. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile navigation toggle
+        document.querySelector('.nav-toggle').addEventListener('click', function() {
+            document.getElementById('nav-menu').classList.toggle('show');
+        });
+
+        // Navbar scroll effect
+        let lastScrollY = window.scrollY;
+        const header = document.querySelector('header');
+
+        function updateHeader() {
+            const scrollY = window.scrollY;
+            const shouldFloat = scrollY > 100;
+
+            if (shouldFloat) {
+                header.classList.add('floating');
+            } else {
+                header.classList.remove('floating');
+            }
+
+            lastScrollY = scrollY;
+        }
+
+        window.addEventListener('scroll', updateHeader, { passive: true });
+
+        // Animation on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElems = document.querySelectorAll('.fade-in');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            });
+
+            fadeElems.forEach(elem => {
+                observer.observe(elem);
+            });
+        });
+    </script>
+</body>
+</html>

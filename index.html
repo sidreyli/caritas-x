@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boys Brigade Learning Centre - Cambodia</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #000000;
+            --secondary: #111111;
+            --white-section: #ffffff;
+            --light-gray: #f8f9fa;
+            --dark-gray: #1a1a1a;
+            --accent: #ffffff;
+            --accent-hover: #f0f0f0;
+            --text-white: #ffffff;
+            --text-black: #000000;
+            --text-gray: #666666;
+            --text-light-gray: rgba(255,255,255,0.7);
+            --border-light: #e5e5e5;
+            --border-dark: #333333;
+            --shadow-light: rgba(0,0,0,0.1);
+            --shadow-dark: rgba(0,0,0,0.3);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: var(--text-white);
+            background-color: var(--primary);
+            overflow-x: hidden;
+            padding-top: 80px;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-white);
+        }
+
+        /* Section styles */
+        .white-section {
+            background-color: var(--white-section);
+            color: var(--text-black);
+        }
+
+        .white-section h1, .white-section h2, .white-section h3, .white-section h4, .white-section h5, .white-section h6 {
+            color: var(--text-black);
+        }
+
+        .white-section .intro-content p {
+            color: var(--text-gray);
+        }
+
+        .black-section {
+            background-color: var(--primary);
+            color: var(--text-white);
+        }
+
+        .dark-section {
+            background-color: var(--secondary);
+            color: var(--text-white);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Highlight.ai style transforming navbar */
+        header {
+            background: transparent;
+            color: var(--text-white);
+            padding: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        header.scrolled {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            margin: 1rem 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            transition: padding 0.3s ease;
+        }
+
+        header.scrolled .header-content {
+            padding: 0.75rem 2rem;
+        }
+        
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            color: var(--text-white);
+            gap: 0.5rem;
+            letter-spacing: -0.5px;
+            transition: font-size 0.3s ease;
+        }
+
+        header.scrolled .logo {
+            font-size: 1.2rem;
+        }
+
+        .logo i {
+            color: var(--text-white);
+            font-size: 1.6rem;
+            transition: font-size 0.3s ease;
+        }
+
+        header.scrolled .logo i {
+            font-size: 1.4rem;
+        }
+        
+        .nav-toggle {
+            display: none;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-white);
+            font-size: 1.1rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-toggle:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 0.25rem;
+        }
+
+        nav li {
+            position: relative;
+        }
+
+        nav > ul > li > a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            padding: 0.65rem 1.2rem;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            border-radius: 12px;
+            position: relative;
+            letter-spacing: 0.2px;
+        }
+
+        nav > ul > li > a:hover {
+            color: var(--text-white);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        nav > ul > li > a.active {
+            color: var(--text-white);
+            background: rgba(255, 255, 255, 0.2);
+            font-weight: 600;
+        }
+
+        /* Dropdown indicator */
+        nav > ul > li.has-dropdown > a::after {
+            content: '';
+            margin-left: 0.5rem;
+            border: solid rgba(255, 255, 255, 0.7);
+            border-width: 0 2px 2px 0;
+            display: inline-block;
+            padding: 2px;
+            transform: rotate(45deg);
+            transition: transform 0.2s ease;
+        }
+
+        nav > ul > li.has-dropdown:hover > a::after {
+            transform: rotate(-135deg);
+        }
+        
+        /* Vertical Dropdown menu - highlight.ai style */
+        .dropdown {
+            position: absolute;
+            top: calc(100% + 1rem);
+            left: 0;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            min-width: 240px;
+            border-radius: 16px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-15px) scale(0.9);
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            z-index: 100;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 0.75rem;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
+        }
+
+        nav li:hover .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+
+        nav li:hover .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown li {
+            margin: 0;
+            width: 100%;
+        }
+
+        .dropdown li {
+            margin: 0;
+            width: 100%;
+        }
+
+        .dropdown a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            padding: 0.8rem 1.2rem;
+            display: block;
+            transition: all 0.2s ease;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+            position: relative;
+        }
+
+        .dropdown a:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: var(--text-white);
+            transform: translateX(4px);
+        }
+
+        .dropdown a::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 3px;
+            height: 0;
+            background: var(--text-white);
+            border-radius: 2px;
+            transition: height 0.2s ease;
+        }
+
+        .dropdown a:hover::before {
+            height: 60%;
+        }
+        
+        /* Hero section */
+        .hero {
+            height: 90vh;
+            background-image: linear-gradient(rgba(26, 35, 50, 0.7), rgba(26, 35, 50, 0.7)), url('images/photos/DSC05900.JPG');
+            background-size: cover;
+            background-position: center;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(transparent, var(--primary));
+            z-index: 1;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            animation: fadeIn 1.5s ease;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            color: var(--text-muted-light);
+        }
+        
+
+        /* Button styles with left-to-right fill animation */
+        .btn {
+            display: inline-block;
+            background: var(--text-white);
+            color: var(--text-black);
+            padding: 1rem 2.2rem;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            margin: 1rem 1rem 0 0;
+            transition: all 0.3s ease;
+            border: 2px solid var(--text-white);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.85rem;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--text-black);
+            transition: left 0.4s ease;
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            left: 0;
+        }
+
+        .btn:hover {
+            color: var(--text-white);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-white);
+            border: 2px solid var(--text-white);
+        }
+
+        .btn-outline::before {
+            background: var(--text-white);
+        }
+
+        .btn-outline:hover {
+            color: var(--text-black);
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Button for white sections */
+        .white-section .btn {
+            background: var(--text-black);
+            color: var(--text-white);
+            border-color: var(--text-black);
+        }
+
+        .white-section .btn::before {
+            background: var(--text-white);
+        }
+
+        .white-section .btn:hover {
+            color: var(--text-black);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        
+        
+        /* Section styles */
+        section {
+            padding: 5rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            font-size: 2.5rem;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+            margin: 1.5rem auto;
+            border-radius: 2px;
+        }
+        
+        /* Introduction section */
+        .intro-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .intro-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: var(--text-muted);
+        }
+
+        .dark-section .intro-content p {
+            color: var(--text-muted-light);
+        }
+        
+        /* Programs section */
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+        
+        .program-card {
+            background-color: var(--white-section);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .program-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        .program-img {
+            height: 220px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            transition: transform 0.5s;
+        }
+        
+        .program-card:hover .program-img {
+            transform: scale(1.05);
+        }
+        
+        .program-content {
+            padding: 2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .program-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-black);
+        }
+        
+        .program-content p {
+            margin-bottom: 1.5rem;
+            color: var(--text-gray);
+            flex-grow: 1;
+        }
+        
+        /* Impact section */
+        .impact-section {
+            background-color: var(--secondary);
+            color: var(--text);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .impact-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at top right, var(--accent-dark), transparent 70%);
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .impact-section .section-title {
+            color: var(--text);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2.5rem;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .stat-item {
+            padding: 2.5rem 2rem;
+            background-color: var(--white-section);
+            border-radius: 12px;
+            transition: transform 0.3s;
+            border: 1px solid var(--border-light);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        
+        .stat-number {
+            font-size: 3.2rem;
+            font-weight: bold;
+            color: var(--text-black);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            color: var(--text-gray);
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+            position: relative;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%239C4DFF' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: var(--text);
+            padding: 4rem 0 1.5rem;
+            border-top: 1px solid #2a2a2a;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+        
+        .footer-section h3 {
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid #2a2a2a;
+            position: relative;
+        }
+        
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--accent);
+        }
+        
+        .footer-section p {
+            margin-bottom: 1.2rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-section i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: all 0.3s;
+            display: block;
+            padding: 0.3rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .footer-links a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: -100%;
+            width: 100%;
+            height: 1px;
+            background: var(--accent);
+            transition: left 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent);
+            padding-left: 10px;
+        }
+        
+        .footer-links a:hover::before {
+            left: 0;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1.2rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background-color: var(--card-bg);
+            color: var(--text);
+            border-radius: 50%;
+            transition: all 0.3s;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #2a2a2a;
+        }
+        
+        .social-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--accent);
+            transition: left 0.3s;
+            z-index: -1;
+        }
+        
+        .social-links a:hover::before {
+            left: 0;
+        }
+        
+        .social-links a:hover {
+            color: var(--text);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.3);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2.5rem;
+            border-top: 1px solid #2a2a2a;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .programs-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: block;
+            }
+            
+            nav ul {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--primary);
+                padding: 1rem 0;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+                border-top: 1px solid #2a2a2a;
+            }
+            
+            nav ul.show {
+                display: flex;
+            }
+            
+            nav li {
+                margin: 0;
+                width: 100%;
+            }
+            
+            nav > ul > li > a {
+                padding: 1rem 1.5rem;
+                border-bottom: 1px solid #2a2a2a;
+            }
+            
+            .dropdown {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                background-color: rgba(26, 26, 26, 0.8);
+                min-width: auto;
+                margin-left: 0;
+                display: none;
+                border: none;
+                border-radius: 0;
+            }
+            
+            nav li:hover .dropdown {
+                display: block;
+            }
+            
+            .dropdown a {
+                color: var(--text-muted);
+                padding: 0.8rem 2rem;
+            }
+            
+            .hero {
+                height: 85vh;
+            }
+            
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .btn {
+                display: block;
+                width: 100%;
+                margin: 1rem auto;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .delay-1 {
+            transition-delay: 0.2s;
+        }
+        
+        .delay-2 {
+            transition-delay: 0.4s;
+        }
+        
+        .delay-3 {
+            transition-delay: 0.6s;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--secondary);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-dark);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                Boys Brigade Learning Centre <span></span>
+            </div>
+            <button class="nav-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav>
+                <ul id="nav-menu">
+                    <li class="has-dropdown">
+                        <a href="#">About</a>
+                        <ul class="dropdown">
+                            <li><a href="mission.html">Mission, Vision, Values</a></li>
+                            <li><a href="team.html">Our Team</a></li>
+                            <li><a href="background.html">Background of BBLC</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <a href="#">Our Programme</a>
+                        <ul class="dropdown">
+                            <li><a href="english.html">English Programme</a></li>
+                            <li><a href="new-plan.html">Computer Class</a></li>
+                            <li><a href="guitar-class.html">Guitar Class</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <a href="#">Get Involved</a>
+                        <ul class="dropdown">
+                            <li><a href="donate.html">Donate</a></li>
+                            <li><a href="visit.html">Visit Us</a></li>
+                            <li><a href="volunteer.html">Volunteer</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="projects.html">Projects</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Empowering Cambodian Youth Through Education</h1>
+            <p>The Boys Brigade Learning Centre provides educational opportunities and life skills to underprivileged children in Cambodia.</p>
+            <div>
+                <a href="donate.html" class="btn">Support Our Mission</a>
+                <a href="visit.html" class="btn btn-outline">Visit Our Centre</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Introduction Section -->
+    <section class="white-section">
+        <div class="container">
+            <h2 class="section-title">Welcome to Our Centre</h2>
+            <div class="intro-content fade-in">
+                <p>Since our establishment, the Boys Brigade Learning Centre has been dedicated to providing quality education and holistic development programs for children in Cambodia. We believe in empowering the next generation through education, skills training, and character development.</p>
+                <p>Our programs range from academic support to extracurricular activities, all designed to help children reach their full potential and break the cycle of poverty.</p>
+            </div>
+
+            <!-- Image Gallery -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem;">
+                <div class="fade-in delay-1" style="border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);">
+                    <img src="images/photos/DSC05831.JPG" alt="Students learning together" style="width: 100%; height: 250px; object-fit: cover;">
+                </div>
+                <div class="fade-in delay-2" style="border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);">
+                    <img src="images/photos/DSC05876.JPG" alt="Classroom activities" style="width: 100%; height: 250px; object-fit: cover;">
+                </div>
+                <div class="fade-in delay-3" style="border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);">
+                    <img src="images/photos/DSC05880.JPG" alt="Learning environment" style="width: 100%; height: 250px; object-fit: cover;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programs Section -->
+    <section class="black-section">
+        <div class="container">
+            <h2 class="section-title">Our Programs</h2>
+            <div class="programs-grid">
+                <div class="program-card fade-in">
+                    <div class="program-img" style="background-image: url('images/photos/DSC05909.JPG');"></div>
+                    <div class="program-content">
+                        <h3>English Classes</h3>
+                        <p>We offer comprehensive English language courses to help students gain valuable communication skills for better opportunities.</p>
+                        <a href="english.html" class="btn">Learn More</a>
+                    </div>
+                </div>
+                <div class="program-card fade-in delay-1">
+                    <div class="program-img" style="background-image: url('images/photos/DSC05834.JPG');"></div>
+                    <div class="program-content">
+                        <h3>Computer Classes</h3>
+                        <p>Our computer literacy program equips students with essential digital skills needed in today's technology-driven world.</p>
+                        <a href="new-plan.html" class="btn">Learn More</a>
+                    </div>
+                </div>
+                <div class="program-card fade-in delay-2">
+                    <div class="program-img" style="background-image: url('images/photos/DSC05875.JPG');"></div>
+                    <div class="program-content">
+                        <h3>Guitar Classes</h3>
+                        <p>Our music program teaches children how to play guitar, fostering creativity, self-expression, and cognitive development.</p>
+                        <a href="guitar-class.html" class="btn">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Section -->
+    <section class="white-section">
+        <div class="container">
+            <h2 class="section-title">Our Impact</h2>
+            <div class="stats-grid">
+                <div class="stat-item fade-in">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Students Educated</div>
+                </div>
+                <div class="stat-item fade-in delay-1">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Volunteers</div>
+                </div>
+                <div class="stat-item fade-in delay-2">
+                    <div class="stat-number">10+</div>
+                    <div class="stat-label">Years of Service</div>
+                </div>
+                <div class="stat-item fade-in delay-3">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label">Programs Offered</div>
+                </div>
+            </div>
+
+            <!-- Success Stories Images -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 4rem;">
+                <div class="fade-in" style="border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); position: relative;">
+                    <img src="images/photos/DSC05921.JPG" alt="Student achievements" style="width: 100%; height: 200px; object-fit: cover;">
+                    <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.8)); color: white; padding: 1.5rem;">
+                        <h4 style="margin-bottom: 0.5rem; color: white;">Student Success</h4>
+                        <p style="font-size: 0.9rem; margin: 0; color: rgba(255,255,255,0.9);">Celebrating achievements in learning</p>
+                    </div>
+                </div>
+                <div class="fade-in delay-1" style="border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); position: relative;">
+                    <img src="images/photos/DSC05927.JPG" alt="Community engagement" style="width: 100%; height: 200px; object-fit: cover;">
+                    <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.8)); color: white; padding: 1.5rem;">
+                        <h4 style="margin-bottom: 0.5rem; color: white;">Community Impact</h4>
+                        <p style="font-size: 0.9rem; margin: 0; color: rgba(255,255,255,0.9);">Building stronger communities</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="black-section">
+        <div class="container">
+            <h2 class="section-title">Make a Difference Today</h2>
+            <p class="fade-in">Your support can transform a child's future through education and opportunity.</p>
+            <div style="margin-top: 2.5rem;">
+                <a href="donate.html" class="btn">Donate Now</a>
+                <a href="volunteer.html" class="btn btn-outline">Volunteer</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Phnom Penh, Cambodia</p>
+                    <p><i class="fas fa-phone"></i> +855 XXX XXX XXX</p>
+                    <p><i class="fas fa-envelope"></i> info@boysbrigadecambodia.org</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="programme.html">Our Programme</a></li>
+                        <li><a href="visit.html">Visit Us</a></li>
+                        <li><a href="donate.html">Donate</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Boys Brigade Learning Centre. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile navigation toggle
+        document.querySelector('.nav-toggle').addEventListener('click', function() {
+            document.getElementById('nav-menu').classList.toggle('show');
+        });
+
+        // Highlight.ai style navbar transformation on scroll
+        let lastScrollTop = 0;
+        const header = document.querySelector('header');
+
+        window.addEventListener('scroll', function() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (scrollTop > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+
+            lastScrollTop = scrollTop;
+        });
+
+        // Animation on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElems = document.querySelectorAll('.fade-in');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            });
+
+            fadeElems.forEach(elem => {
+                observer.observe(elem);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guitar Classes - Boys Brigade Learning Centre</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #000000;
+            --secondary: #111111;
+            --white-section: #ffffff;
+            --light-gray: #f8f9fa;
+            --dark-gray: #1a1a1a;
+            --accent: #ffffff;
+            --accent-hover: #f0f0f0;
+            --text-white: #ffffff;
+            --text-black: #000000;
+            --text-gray: #666666;
+            --text-light-gray: rgba(255,255,255,0.7);
+            --border-light: #e5e5e5;
+            --border-dark: #333333;
+            --shadow-light: rgba(0,0,0,0.1);
+            --shadow-dark: rgba(0,0,0,0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: var(--text-white);
+            background-color: var(--primary);
+            overflow-x: hidden;
+            padding-top: 80px;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-white);
+        }
+
+        .white-section {
+            background-color: var(--white-section);
+            color: var(--text-black);
+        }
+
+        .white-section h1, .white-section h2, .white-section h3, .white-section h4, .white-section h5, .white-section h6 {
+            color: var(--text-black);
+        }
+
+        .white-section .intro-content p {
+            color: var(--text-gray);
+        }
+
+        .black-section {
+            background-color: var(--primary);
+            color: var(--text-white);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Highlight.ai style transforming navbar */
+        header {
+            background: transparent;
+            color: var(--text-white);
+            padding: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        header.scrolled {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            margin: 1rem 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            transition: padding 0.3s ease;
+        }
+
+        header.scrolled .header-content {
+            padding: 0.75rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            color: var(--text-white);
+            gap: 0.5rem;
+            letter-spacing: -0.5px;
+            transition: font-size 0.3s ease;
+        }
+
+        header.scrolled .logo {
+            font-size: 1.2rem;
+        }
+
+        .logo i {
+            color: var(--text-white);
+            font-size: 1.6rem;
+            transition: font-size 0.3s ease;
+        }
+
+        header.scrolled .logo i {
+            font-size: 1.4rem;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-white);
+            font-size: 1.1rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-toggle:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 0.25rem;
+        }
+
+        nav li {
+            position: relative;
+        }
+
+        nav > ul > li > a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            padding: 0.65rem 1.2rem;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            border-radius: 12px;
+            position: relative;
+            letter-spacing: 0.2px;
+        }
+
+        nav > ul > li > a:hover {
+            color: var(--text-white);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        nav > ul > li > a.active {
+            color: var(--text-white);
+            background: rgba(255, 255, 255, 0.2);
+            font-weight: 600;
+        }
+
+        nav > ul > li.has-dropdown > a::after {
+            content: '';
+            margin-left: 0.5rem;
+            border: solid rgba(255, 255, 255, 0.7);
+            border-width: 0 2px 2px 0;
+            display: inline-block;
+            padding: 2px;
+            transform: rotate(45deg);
+            transition: transform 0.2s ease;
+        }
+
+        nav > ul > li.has-dropdown:hover > a::after {
+            transform: rotate(-135deg);
+        }
+
+        .dropdown {
+            position: absolute;
+            top: calc(100% + 1rem);
+            left: 0;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            min-width: 240px;
+            border-radius: 16px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-15px) scale(0.9);
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            z-index: 100;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 0.75rem;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
+        }
+
+        nav li:hover .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+
+        .dropdown li {
+            margin: 0;
+            width: 100%;
+        }
+
+        .dropdown a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            padding: 0.8rem 1.2rem;
+            display: block;
+            transition: all 0.2s ease;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+            position: relative;
+        }
+
+        .dropdown a:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: var(--text-white);
+            transform: translateX(4px);
+        }
+
+        .dropdown a::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 3px;
+            height: 0;
+            background: var(--text-white);
+            border-radius: 2px;
+            transition: height 0.2s ease;
+        }
+
+        .dropdown a:hover::before {
+            height: 60%;
+        }
+
+        /* Hero section */
+        .hero {
+            height: 90vh;
+            background-image: linear-gradient(rgba(26, 35, 50, 0.7), rgba(26, 35, 50, 0.7)), url('images/photos/DSC05875.JPG');
+            background-size: cover;
+            background-position: center;
+            color: var(--text-white);
+            display: flex;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(transparent, var(--primary));
+            z-index: 1;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            animation: fadeIn 1.5s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-white);
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            color: var(--text-light-gray);
+        }
+
+        /* Button styles with left-to-right fill animation */
+        .btn {
+            display: inline-block;
+            background: var(--text-white);
+            color: var(--text-black);
+            padding: 1rem 2.2rem;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            margin: 1rem 1rem 0 0;
+            transition: all 0.3s ease;
+            border: 2px solid var(--text-white);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.85rem;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--text-black);
+            transition: left 0.4s ease;
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            left: 0;
+        }
+
+        .btn:hover {
+            color: var(--text-white);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-white);
+            border: 2px solid var(--text-white);
+        }
+
+        .btn-outline::before {
+            background: var(--text-white);
+        }
+
+        .btn-outline:hover {
+            color: var(--text-black);
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+        }
+
+        .white-section .btn {
+            background: var(--text-black);
+            color: var(--text-white);
+            border-color: var(--text-black);
+        }
+
+        .white-section .btn::before {
+            background: var(--text-white);
+        }
+
+        .white-section .btn:hover {
+            color: var(--text-black);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Section styles */
+        section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            font-size: 2.5rem;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+            margin: 1.5rem auto;
+            border-radius: 2px;
+        }
+
+        .white-section .section-title::after {
+            background: var(--text-black);
+        }
+
+        .intro-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .intro-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: var(--text-light-gray);
+        }
+
+        .white-section .intro-content p {
+            color: var(--text-gray);
+        }
+
+        /* Course details */
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .course-card {
+            background-color: var(--white-section);
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 5px 20px var(--shadow-dark);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .course-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .course-card h3 {
+            color: var(--text-black);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .course-card p {
+            color: var(--text-gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .course-features {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .course-features li {
+            padding: 0.5rem 0;
+            color: var(--text-gray);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .course-features li::before {
+            content: 'j';
+            position: absolute;
+            left: 0;
+            color: var(--text-black);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Two column layout */
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-top: 3rem;
+        }
+
+        .two-column img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .two-column .content h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-white);
+        }
+
+        .white-section .two-column .content h3 {
+            color: var(--text-black);
+        }
+
+        .two-column .content p {
+            color: var(--text-light-gray);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .white-section .two-column .content p {
+            color: var(--text-gray);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary);
+            color: var(--text-white);
+            padding: 4rem 0 1.5rem;
+            border-top: 1px solid #2a2a2a;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .footer-section h3 {
+            color: var(--text-white);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .footer-section p {
+            margin-bottom: 1.2rem;
+            color: var(--text-light-gray);
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-section i {
+            margin-right: 10px;
+            color: var(--text-white);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--text-light-gray);
+            text-decoration: none;
+            transition: all 0.3s;
+            display: block;
+            padding: 0.3rem 0;
+        }
+
+        .footer-links a:hover {
+            color: var(--text-white);
+            padding-left: 10px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.2rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--text-white);
+            border-radius: 50%;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            background-color: var(--text-white);
+            color: var(--text-black);
+            transform: translateY(-5px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2.5rem;
+            border-top: 1px solid #2a2a2a;
+            color: var(--text-light-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: block;
+            }
+
+            nav ul {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--primary);
+                padding: 1rem 0;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+                border-top: 1px solid #2a2a2a;
+            }
+
+            nav ul.show {
+                display: flex;
+            }
+
+            nav li {
+                margin: 0;
+                width: 100%;
+            }
+
+            nav > ul > li > a {
+                padding: 1rem 1.5rem;
+                border-bottom: 1px solid #2a2a2a;
+                margin: 0;
+                border-radius: 0;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .two-column {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .course-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-1 {
+            transition-delay: 0.2s;
+        }
+
+        .delay-2 {
+            transition-delay: 0.4s;
+        }
+
+        .delay-3 {
+            transition-delay: 0.6s;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                Boys Brigade Learning Centre
+            </div>
+            <button class="nav-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav>
+                <ul id="nav-menu">
+                    <li class="has-dropdown">
+                        <a href="#">About</a>
+                        <ul class="dropdown">
+                            <li><a href="mission.html">Mission, Vision, Values</a></li>
+                            <li><a href="team.html">Our Team</a></li>
+                            <li><a href="background.html">Background of BBLC</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <a href="#" class="active">Our Programme</a>
+                        <ul class="dropdown">
+                            <li><a href="english.html">English Programme</a></li>
+                            <li><a href="new-plan.html">Computer Class</a></li>
+                            <li><a href="guitar-class.html">Guitar Class</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <a href="#">Get Involved</a>
+                        <ul class="dropdown">
+                            <li><a href="donate.html">Donate</a></li>
+                            <li><a href="visit.html">Visit Us</a></li>
+                            <li><a href="volunteer.html">Volunteer</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="projects.html">Projects</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Guitar Classes</h1>
+            <p>Learn to play guitar while developing creativity, self-expression, and cognitive skills</p>
+            <div>
+                <a href="visit.html" class="btn">Join Our Classes</a>
+                <a href="donate.html" class="btn btn-outline">Support Music Education</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Introduction Section -->
+    <section class="white-section">
+        <div class="container">
+            <h2 class="section-title">Music Education Programme</h2>
+            <div class="intro-content fade-in">
+                <p>Our guitar programme introduces students to the wonderful world of music through hands-on learning and creative expression. Music education has been proven to enhance cognitive development, improve academic performance, and build confidence in young learners.</p>
+
+                <p>From complete beginners to those with some musical experience, our classes provide a supportive environment where students can discover their musical talents and develop lifelong skills.</p>
+            </div>
+
+            <!-- Image Gallery -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem;">
+                <div class="fade-in delay-1" style="border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);">
+                    <img src="images/photos/DSC05922.JPG" alt="Students learning guitar" style="width: 100%; height: 250px; object-fit: cover;">
+                </div>
+                <div class="fade-in delay-2" style="border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);">
+                    <img src="images/photos/DSC05914.JPG" alt="Music classroom" style="width: 100%; height: 250px; object-fit: cover;">
+                </div>
+                <div class="fade-in delay-3" style="border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);">
+                    <img src="images/photos/DSC05915.JPG" alt="Guitar lesson" style="width: 100%; height: 250px; object-fit: cover;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Details Section -->
+    <section class="black-section">
+        <div class="container">
+            <h2 class="section-title">What Students Learn</h2>
+            <div class="course-grid">
+                <div class="course-card fade-in">
+                    <h3>Basic Guitar Skills</h3>
+                    <p>Students start with fundamental guitar techniques including proper posture, finger positioning, and basic chord progressions.</p>
+                    <ul class="course-features">
+                        <li>Guitar anatomy and care</li>
+                        <li>Basic chord formations</li>
+                        <li>Simple strumming patterns</li>
+                        <li>Reading chord charts</li>
+                    </ul>
+                </div>
+
+                <div class="course-card fade-in delay-1">
+                    <h3>Music Theory</h3>
+                    <p>We introduce age-appropriate music theory concepts that help students understand the structure and language of music.</p>
+                    <ul class="course-features">
+                        <li>Note recognition</li>
+                        <li>Basic rhythm patterns</li>
+                        <li>Song structure understanding</li>
+                        <li>Musical expression</li>
+                    </ul>
+                </div>
+
+                <div class="course-card fade-in delay-2">
+                    <h3>Performance Skills</h3>
+                    <p>Students build confidence through regular practice sessions and opportunities to perform for their peers and families.</p>
+                    <ul class="course-features">
+                        <li>Solo performance</li>
+                        <li>Group playing</li>
+                        <li>Stage presence</li>
+                        <li>Musical collaboration</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="white-section">
+        <div class="container">
+            <h2 class="section-title">Benefits of Learning Guitar</h2>
+            <div class="two-column fade-in">
+                <div>
+                    <img src="images/photos/DSC05912.JPG" alt="Student playing guitar">
+                </div>
+                <div class="content">
+                    <h3>Cognitive Development</h3>
+                    <p>Learning guitar stimulates multiple areas of the brain simultaneously, improving memory, concentration, and problem-solving skills. Students often see improvements in their academic performance as well.</p>
+
+                    <p>Music education helps develop pattern recognition, mathematical thinking, and language skills - all while having fun and expressing creativity.</p>
+
+                    <p>The discipline required to learn an instrument also teaches patience, perseverance, and goal-setting skills that benefit students in all areas of life.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Class Information Section -->
+    <section class="black-section">
+        <div class="container">
+            <h2 class="section-title">Class Information</h2>
+            <div class="intro-content fade-in">
+                <div style="background-color: var(--white-section); color: var(--text-black); border-radius: 12px; padding: 3rem; max-width: 600px; margin: 0 auto; text-align: left;">
+                    <h3 style="color: var(--text-black); text-align: center; margin-bottom: 2rem;">Guitar Class Schedule</h3>
+
+                    <div style="margin-bottom: 1.5rem;">
+                        <strong style="color: var(--text-black);">Beginner Classes:</strong><br>
+                        <span style="color: var(--text-gray);">Monday & Wednesday: 3:00 PM - 4:00 PM</span>
+                    </div>
+
+                    <div style="margin-bottom: 1.5rem;">
+                        <strong style="color: var(--text-black);">Intermediate Classes:</strong><br>
+                        <span style="color: var(--text-gray);">Tuesday & Thursday: 3:00 PM - 4:00 PM</span>
+                    </div>
+
+                    <div style="margin-bottom: 1.5rem;">
+                        <strong style="color: var(--text-black);">Class Size:</strong><br>
+                        <span style="color: var(--text-gray);">Maximum 8 students per class</span>
+                    </div>
+
+                    <div style="margin-bottom: 1.5rem;">
+                        <strong style="color: var(--text-black);">Age Range:</strong><br>
+                        <span style="color: var(--text-gray);">8 years and above</span>
+                    </div>
+
+                    <div style="margin-bottom: 1.5rem;">
+                        <strong style="color: var(--text-black);">Equipment:</strong><br>
+                        <span style="color: var(--text-gray);">Guitars provided for all students</span>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid #e5e5e5;">
+                        <strong style="color: var(--text-black); font-size: 1.2rem;">All classes are FREE!</strong>
+                    </div>
+                </div>
+
+                <div style="margin-top: 3rem;">
+                    <a href="visit.html" class="btn">Visit Our Centre</a>
+                    <a href="volunteer.html" class="btn btn-outline">Support Our Programme</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Phnom Penh, Cambodia</p>
+                    <p><i class="fas fa-phone"></i> +855 XXX XXX XXX</p>
+                    <p><i class="fas fa-envelope"></i> info@boysbrigadecambodia.org</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="visit.html">Visit Us</a></li>
+                        <li><a href="donate.html">Donate</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Our Programs</h3>
+                    <ul class="footer-links">
+                        <li><a href="english.html">English Programme</a></li>
+                        <li><a href="new-plan.html">Computer Class</a></li>
+                        <li><a href="guitar-class.html">Guitar Class</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Boys Brigade Learning Centre. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile navigation toggle
+        document.querySelector('.nav-toggle').addEventListener('click', function() {
+            document.getElementById('nav-menu').classList.toggle('show');
+        });
+
+        // Highlight.ai style navbar transformation on scroll
+        let lastScrollTop = 0;
+        const header = document.querySelector('header');
+
+        window.addEventListener('scroll', function() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (scrollTop > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+
+            lastScrollTop = scrollTop;
+        });
+
+        // Animation on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElems = document.querySelectorAll('.fade-in');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            });
+
+            fadeElems.forEach(elem => {
+                observer.observe(elem);
+            });
+        });
+    </script>
+</body>
+</html>
